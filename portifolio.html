@@ -1,0 +1,736 @@
+<!doctype html>
+
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Geist:wght@400;500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+      .surface_glass {
+        background: rgba(26, 28, 32, 0.6);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .card-glow:hover {
+        border-color: #d0bcff;
+        box-shadow: 0px 10px 30px rgba(139, 92, 246, 0.15);
+      }
+      .shimmer-bar {
+        position: relative;
+        overflow: hidden;
+      }
+      .shimmer-bar::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 50%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent
+        );
+        animation: shimmer 3s infinite;
+      }
+      @keyframes shimmer {
+        100% {
+          left: 200%;
+        }
+      }
+      body {
+        background-color: #111318;
+        color: #e2e2e8;
+        font-family: 'Times New Roman', Times;
+        padding: 3%;
+      }
+    </style>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-primary-fixed": "#23005c",
+              "outline-variant": "#494454",
+              "on-secondary-fixed-variant": "#004e5c",
+              "on-tertiary-fixed-variant": "#673d00",
+              "on-background": "#e2e2e8",
+              "secondary-fixed": "#acedff",
+              "primary-fixed": "#e9ddff",
+              "surface-container-low": "#1a1c20",
+              "secondary-container": "#03b5d3",
+              secondary: "#4cd7f6",
+              "secondary-fixed-dim": "#4cd7f6",
+              "surface-bright": "#37393e",
+              "on-tertiary-container": "#3f2300",
+              "on-surface": "#e2e2e8",
+              "on-primary": "#3c0091",
+              "inverse-on-surface": "#2f3035",
+              outline: "#958ea0",
+              "tertiary-fixed-dim": "#ffb869",
+              "surface-variant": "#333539",
+              "surface-container-lowest": "#0c0e12",
+              "on-secondary": "#003640",
+              "inverse-primary": "#6d3bd7",
+              "surface-container": "#1e2024",
+              "on-secondary-fixed": "#001f26",
+              "on-error-container": "#ffdad6",
+              tertiary: "#ffb869",
+              surface: "#111318",
+              error: "#ffb4ab",
+              "on-error": "#690005",
+              primary: "#d0bcff",
+              "surface-tint": "#d0bcff",
+              "on-tertiary": "#482900",
+              "on-primary-fixed-variant": "#5516be",
+              "on-tertiary-fixed": "#2c1700",
+              "tertiary-fixed": "#ffdcbb",
+              "surface-container-high": "#282a2e",
+              "on-primary-container": "#340080",
+              "surface-container-highest": "#333539",
+              background: "#111318",
+              "on-surface-variant": "#cbc3d7",
+              "tertiary-container": "#ca801e",
+              "error-container": "#93000a",
+              "primary-fixed-dim": "#d0bcff",
+              "on-secondary-container": "#00424e",
+              "inverse-surface": "#e2e2e8",
+              "surface-dim": "#111318",
+              "primary-container": "#a078ff",
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+            spacing: {
+              "margin-mobile": "20px",
+              "container-max": "1200px",
+              gutter: "24px",
+              base: "8px",
+              "section-gap": "120px",
+            },
+            fontFamily: {
+              "headline-xl": ["Plus Jakarta Sans"],
+              "label-md": ["Geist"],
+              "headline-md": ["Plus Jakarta Sans"],
+              "headline-lg": ["Plus Jakarta Sans"],
+              "body-md": ["Inter"],
+              "code-sm": ["Geist"],
+              "headline-lg-mobile": ["Plus Jakarta Sans"],
+              "body-lg": ["Inter"],
+            },
+            fontSize: {
+              "headline-xl": [
+                "64px",
+                {
+                  lineHeight: "1.1",
+                  letterSpacing: "-0.04em",
+                  fontWeight: "800",
+                },
+              ],
+              "label-md": [
+                "14px",
+                {
+                  lineHeight: "1.2",
+                  letterSpacing: "0.05em",
+                  fontWeight: "500",
+                },
+              ],
+              "headline-md": ["24px", { lineHeight: "1.4", fontWeight: "600" }],
+              "headline-lg": [
+                "40px",
+                {
+                  lineHeight: "1.2",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+              "body-md": ["16px", { lineHeight: "1.6", fontWeight: "400" }],
+              "code-sm": ["13px", { lineHeight: "1.5", fontWeight: "400" }],
+              "headline-lg-mobile": [
+                "32px",
+                { lineHeight: "1.2", fontWeight: "700" },
+              ],
+              "body-lg": ["18px", { lineHeight: "1.6", fontWeight: "400" }],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        min-height: max(884px, 100dvh);
+      }
+    </style>
+  </head>
+  <body class="font-body-md text-on-surface selection:bg-primary/30">
+    <!-- TopAppBar -->
+
+    <main class=" space-y-section-gap">
+      <!-- Hero Section -->
+      <section class="px-margin-mobile relative overflow-hidden">
+        <div
+          class="absolute top-[-10%] right-[-10%] w-[300px] h-[300px] bg-primary/20 blur-[100px] rounded-full"
+        ></div>
+        <div
+          class="absolute bottom-[-5%] left-[-5%] w-[250px] h-[250px] bg-secondary/15 blur-[80px] rounded-full"
+        ></div>
+        <div
+          class="relative z-10 text-left space-y-6 max-w-container-max mx-auto"
+        >
+          <div class="space-y-2">
+
+            <h1
+              class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-xl md:text-headline-xl text-on-surface"
+            >
+              Hello, I'm
+              <span 
+                class=" text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary"
+                ><i>Sseguya Huzaifah</i></span
+              >
+            </h1>
+            <p
+              class="font-headline-md text-headline-md text-on-surface-variant"
+            >
+              Full Stack Developer
+            </p>
+          </div>
+          <p class="font-body-lg text-body-lg text-outline max-w-md">
+            Building the future with code. Engineered for precision,
+            performance, and perfection.
+          </p>
+          <div class="flex flex-col gap-4 pt-4">
+
+            <div class="grid grid-cols-2 gap-4 mb-4 md:mb-0">
+            <button
+              class=" py-4 rounded-xl bg-gradient-to-r from-primary-container to-secondary-container text-on-primary-container font-bold shadow-[0_10px_30px_rgba(109,59,215,0.2)]"
+            > <a href="#Projects">   VIEW PROJECTS </a>
+            </button>
+              <button
+                class="py-3 rounded-xl border border-white/10 surface_glass text-on-surface font-medium hover:bg-white/5"
+              >
+                <a href="#Contact">   CONTACT ME </a>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Stats Section -->
+      <section class="px-margin-mobile">
+        <div class="max-w-container-max mx-auto grid grid-cols-3 gap-4">
+          <div class="text-center p-4 border-l border-white/5">
+            <div class="font-headline-md text-headline-md text-secondary">
+              3+
+            </div>
+            <div class="font-label-md text-label-md text-outline">PROJECTS</div>
+          </div>
+
+          <div class="text-center p-4 border-l border-white/5">
+            <div class="font-headline-md text-headline-md text-tertiary">
+              1+
+            </div>
+            <div class="font-label-md text-label-md text-outline">YEAR EXP</div>
+          </div>
+        </div>
+      </section>
+      <!-- About Me Section -->
+      <section class="px-margin-mobile space-y-8">
+        <div class="flex flex-col items-center gap-6">
+          <div
+            class="relative p-1 rounded-full bg-gradient-to-br from-primary via-secondary to-tertiary shadow-xl"
+          >
+            <img
+              alt="Sseguya Huzaifah Sulaiman Profile"
+              class="w-32 h-32 rounded-full border-4 border-surface object-cover"
+              data-alt="A professional, clean-cut male portrait with a slight friendly smile, set against a dark, minimalist architectural background. The lighting is dramatic and cinematic, featuring subtle cool-toned rim lights in purple and cyan, matching a futuristic software engineer aesthetic. The image is framed as a high-resolution headshot."
+              src="Hzyf.jpg"
+            />
+          </div>
+          <div class="text-center space-y-4">
+            <h2
+              class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface"
+            >
+                About Me
+            </h2>
+            <p
+              class="font-body-md text-body-md text-on-surface-variant max-w-lg"
+            >
+              I am a Computer Science graduate specializing in architecting
+              scalable web applications. My passion lies in bridging the gap
+              between elegant UI design and robust backend infrastructure. 
+            </p>
+          </div>
+          <div
+            class="w-full max-w-md surface_glass p-6 rounded-2xl border border-white/10 card-glow transition-all"
+          >
+            <div class="flex items-center gap-4">
+              <span
+                class="material-symbols-outlined text-tertiary text-4xl"
+                data-icon="school"
+                >school</span
+              >
+              <div>
+                <div class="font-headline-md text-headline-md">
+                  B.Sc. Computer Science
+                </div>
+                <!--<div class="font-label-md text-label-md text-outline">CLASS OF 2024 • HONORS</div>-->
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Skills Section -->
+      <section class="px-margin-mobile space-y-8">
+        <div class="max-w-container-max mx-auto space-y-6">
+          <h2
+            class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface text-left"
+          >
+            Technical Arsenal
+          </h2>
+          <div class="grid grid-cols-2 gap-4">
+            <!-- JavaScript -->
+            <div class="surface_glass p-4 rounded-xl space-y-3">
+              <div class="flex justify-between items-center">
+                <span
+                  class="material-symbols-outlined text-primary"
+                  data-icon="javascript"
+                  >javascript</span
+                >
+                <span
+                  class="font-label-md text-label-md text-on-surface-variant"
+                  >75%</span
+                >
+              </div>
+              <div class="font-label-md text-label-md">JavaScript</div>
+              <div class="h-1 w-full bg-white/5 rounded-full overflow-hidden">
+                <div
+                  class="h-full bg-primary shimmer-bar"
+                  style="width: 75%"
+                ></div>
+              </div>
+            </div>
+            <!-- React -->
+            <div class="surface_glass p-4 rounded-xl space-y-3">
+              <div class="flex justify-between items-center">
+                <span
+                  class="material-symbols-outlined text-secondary"
+                  data-icon="deployed_code"
+                  >deployed_code</span
+                >
+                <span
+                  class="font-label-md text-label-md text-on-surface-variant"
+                  >80%</span
+                >
+              </div>
+              <div class="font-label-md text-label-md">React</div>
+              <div class="h-1 w-full bg-white/5 rounded-full overflow-hidden">
+                <div
+                  class="h-full bg-secondary shimmer-bar"
+                  style="width: 80%"
+                ></div>
+              </div>
+            </div>
+            <!-- Node.js -->
+            <div class="surface_glass p-4 rounded-xl space-y-3">
+              <div class="flex justify-between items-center">
+                <span
+                  class="material-symbols-outlined text-tertiary"
+                  data-icon="settings_ethernet"
+                  >settings_ethernet</span
+                >
+                <span
+                  class="font-label-md text-label-md text-on-surface-variant"
+                  >65%</span
+                >
+              </div>
+              <div class="font-label-md text-label-md">Node.js</div>
+              <div class="h-1 w-full bg-white/5 rounded-full overflow-hidden">
+                <div
+                  class="h-full bg-tertiary shimmer-bar"
+                  style="width: 65%"
+                ></div>
+              </div>
+            </div>
+            <!-- Kotlin with android studio -->
+            <div class="surface_glass p-4 rounded-xl space-y-3">
+              <div class="flex justify-between items-center">
+                <span
+                  class="material-symbols-outlined text-primary"
+                  data-icon="android"
+                  >android</span
+                >
+                <span
+                  class="font-label-md text-label-md text-on-surface-variant"
+                  >68%</span
+                >
+              </div>
+              <div class="font-label-md text-label-md">Kotlin with Android Studio</div>
+              <div class="h-1 w-full bg-white/5 rounded-full overflow-hidden">
+                <div
+                  class="h-full bg-primary shimmer-bar"
+                  style="width: 68%"
+                ></div>
+              </div>
+            </div>
+            <!-- Laravel -->
+            <div class="surface_glass p-4 rounded-xl space-y-3">
+              <div class="flex justify-between items-center">
+                <span
+                  class="material-symbols-outlined text-error"
+                  data-icon="storage"
+                  >storage</span
+                >
+                <span
+                  class="font-label-md text-label-md text-on-surface-variant"
+                  >76%</span
+                >
+              </div>
+              <div class="font-label-md text-label-md">Laravel</div>
+              <div class="h-1 w-full bg-white/5 rounded-full overflow-hidden">
+                <div
+                  class="h-full bg-error shimmer-bar"
+                  style="width: 76%"
+                ></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Projects Section -->
+      <section id="Projects" class=" px-margin-mobile space-y-8">
+        <h2
+          class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface"
+        >
+          Recent Deployments
+        </h2>
+        <div class="space-y-8">
+          <!-- Project 1 -->
+          <div
+            class="surface_glass rounded-3xl overflow-hidden border border-white/10 flex flex-col"
+          >
+            <img
+              alt="School Management System"
+              class="w-full h-50 object-cover"
+              data-alt="A sleek, modern dashboard interface for an educational management platform displayed on a high-end laptop screen. The UI features clean glassmorphism cards, vibrant data visualizations in purple and cyan, and a dark mode theme. The surrounding setting is a dark, tech-focused workspace with ambient LED lighting."
+              src="dashboard.jpg"
+            />
+            <div class="p-6 space-y-4">
+              <div class="flex flex-wrap gap-2">
+                <span
+                  class="px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary font-label-md text-[10px]"
+                  >PHP</span
+                >
+                <span
+                  class="px-3 py-1 rounded-full bg-secondary/10 border border-secondary/20 text-secondary font-label-md text-[10px]"
+                  >MYSQL</span
+                >
+              </div>
+              <h3 class="font-headline-md text-headline-md text-on-surface">
+                School Management
+              </h3>
+              <p class="font-body-md text-body-md text-outline">
+                A comprehensive School Management system for educational institutions majorly primary schools in Uganda handling
+                3k+ records with real-time analytics.
+              </p>
+             <!-- <div class="flex gap-4">
+                <button
+                  class="flex-1 py-3 rounded-xl bg-white/5 border border-white/10 text-on-surface hover:bg-white/10 transition-all font-medium"
+                >
+                  GITHUB
+                </button>
+                <button
+                  class="flex-1 py-3 rounded-xl bg-primary text-on-primary font-medium"
+                >
+                  LIVE DEMO
+                </button>
+              </div>-->
+            </div>
+          </div>
+
+<!-- Project 2 -->
+          <div
+            class="surface_glass rounded-3xl overflow-hidden border border-white/10 flex flex-col"
+          >
+            <img
+              alt="Comprehensive  system"
+              class="w-full h-50 object-cover"
+              data-alt="Comprehensive Calculation Management System"
+              src="umma.jpg"
+            />
+            <div class="p-6 space-y-4">
+              <div class="flex flex-wrap gap-2">
+                <span
+                  class="px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary font-label-md text-[10px]"
+                  >PHP</span
+                >
+                <span
+                  class="px-3 py-1 rounded-full bg-secondary/10 border border-secondary/20 text-secondary font-label-md text-[10px]"
+                  >MYSQL</span
+                >
+              </div>
+              <h3 class="font-headline-md text-headline-md text-on-surface">
+                Comprehensive Management System
+              </h3>
+              <p class="font-body-md text-body-md text-outline">
+                A comprehensive System for managing particpants data, carrying out several calculations and sorting of data according to performace and other factors to determine the best performing members and also giving reports.
+              </p>
+             <!-- <div class="flex gap-4">
+                <button
+                  class="flex-1 py-3 rounded-xl bg-white/5 border border-white/10 text-on-surface hover:bg-white/10 transition-all font-medium"
+                >
+                  GITHUB
+                </button>
+                <button
+                  class="flex-1 py-3 rounded-xl bg-primary text-on-primary font-medium"
+                >
+                  LIVE DEMO
+                </button>
+              </div>-->
+            </div>
+          </div>
+          <!-- Project 3-->
+          <div
+            class="surface_glass rounded-3xl overflow-hidden border border-white/10 flex flex-col"
+          >
+            <img
+              alt="Gas Prediction Model"
+              class="w-full h-50 object-cover "
+              data-alt="Gas Price Prediction model interface displayed on a sleek, modern laptop screen. The UI features a dark mode theme with glassmorphism cards, vibrant data visualizations in purple and cyan, and a clean, minimalist design. The surrounding setting is a dark, tech-focused workspace with ambient LED lighting."
+              src="gas.jpg"
+            />
+            <div class="p-6 space-y-4">
+              <div class="flex flex-wrap gap-2">
+                <span
+                  class="px-3 py-1 rounded-full bg-tertiary/10 border border-tertiary/20 text-tertiary font-label-md text-[10px]"
+                  >Kotlin</span
+                >
+                <span
+                  class="px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary font-label-md text-[10px]"
+                  >Firebase</span
+                >
+              </div>
+              <h3 class="font-headline-md text-headline-md text-on-surface">
+                Gas Price Prediction
+              </h3>
+              <p class="font-body-md text-body-md text-outline">
+                Machine learning model trained to predict gas cylinder refill demand with 92% accuracy, consumption patterns and gas leak detection.
+              </p>
+             <!-- <div class="flex gap-4">
+                <button
+                  class="flex-1 py-3 rounded-xl bg-white/5 border border-white/10 text-on-surface font-medium"
+                >
+                  GITHUB
+                </button>
+                <button
+                  class="flex-1 py-3 rounded-xl bg-primary text-on-primary font-medium"
+                >
+                  LIVE DEMO
+                </button>
+              </div>-->
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Services Section -->
+      <section class="px-margin-mobile space-y-6">
+        <h2
+          class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface"
+        >
+          Core Services
+        </h2>
+        <div class="grid gap-4">
+          <div
+            class="surface_glass p-6 rounded-2xl border-l-4 border-l-primary"
+          >
+            <span
+              class="material-symbols-outlined text-primary mb-2"
+              data-icon="web"
+              >web</span
+            >
+            <h4 class="font-headline-md text-headline-md">Frontend Dev</h4>
+            <p class="font-body-md text-body-md text-on-surface-variant">
+              Building immersive, high-performance interfaces.
+            </p>
+          </div>
+          <div
+            class="surface_glass p-6 rounded-2xl border-l-4 border-l-secondary"
+          >
+            <span
+              class="material-symbols-outlined text-secondary mb-2"
+              data-icon="data_object"
+              >data_object</span
+            >
+            <h4 class="font-headline-md text-headline-md">Backend Dev</h4>
+            <p class="font-body-md text-body-md text-on-surface-variant">
+              Robust logic and database architecture.
+            </p>
+          </div>
+        <!--  <div
+            class="surface_glass p-6 rounded-2xl border-l-4 border-l-tertiary"
+          >
+            <span
+              class="material-symbols-outlined text-tertiary mb-2"
+              data-icon="api"
+              >api</span
+            >
+            <h4 class="font-headline-md text-headline-md">API Design</h4>
+            <p class="font-body-md text-body-md text-on-surface-variant">
+              Scalable and secure endpoint engineering.
+            </p>
+          </div>-->
+        </div>
+      </section>
+      <!-- Testimonials -->
+      <section
+        class="px-margin-mobile bg-surface-container-low py-16 -mx-margin-mobile"
+      >
+        <div class="px-margin-mobile space-y-8">
+          <h2
+            class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface"
+          >
+            Client Feedback
+          </h2>
+          <div class="surface_glass p-8 rounded-3xl space-y-6 relative">
+            <span
+              class="material-symbols-outlined text-6xl text-white/5 absolute top-4 right-4"
+              data-icon="format_quote"
+              >format_quote</span
+            >
+            <p class="font-body-lg text-body-lg italic text-on-surface italic">
+              "Huzaifah delivered a project that exceeded our expectations. The
+              attention to detail and technical proficiency is truly
+              world-class."
+            </p>
+            <div class="flex items-center gap-4">
+              <div
+                class="w-12 h-12 rounded-full bg-surface-variant flex items-center justify-center font-bold text-primary"
+              >
+                SK
+              </div>
+              <div>
+                <div class="font-label-md text-label-md font-bold">
+                  Ssempala Kibalemu
+                </div>
+                <div class="font-label-md text-label-md text-outline">
+                  Director, IFRAAD LC
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Contact Section -->
+      <section class="px-margin-mobile space-y-8 pb-12">
+        <div class="space-y-4">
+          <h2
+            class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface"
+          >
+            Let's Connect
+          </h2>
+          <p class="font-body-md text-body-md text-outline">
+            Ready to build something amazing? Let's start right away.
+          </p>
+        </div>
+     <!--   <form class="space-y-4">
+          <div>
+            <input
+              class="w-full bg-[#0F1117] border-white/10 rounded-xl px-4 py-4 text-on-surface focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all outline-none"
+              placeholder="Name"
+              type="text"
+            />
+          </div>
+          <div>
+            <input
+              class="w-full bg-[#0F1117] border-white/10 rounded-xl px-4 py-4 text-on-surface focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all outline-none"
+              placeholder="Email"
+              type="email"
+            />
+          </div>
+          <div>
+            <textarea
+              class="w-full bg-[#0F1117] border-white/10 rounded-xl px-4 py-4 text-on-surface focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all outline-none"
+              placeholder="Message"
+              rows="4"
+            ></textarea>
+          </div>
+          <button
+            class="w-full py-4 rounded-xl bg-primary text-on-primary font-bold shadow-lg shadow-primary/20"
+          >
+            SEND MESSAGE
+          </button>
+        </form>-->
+<div id="Contact" class="max-w-md mx-auto pt-6 px-4">
+  <!-- Social & Chat Icons Row -->
+  <div class="flex justify-center gap-4 mb-6">
+    <!-- LinkedIn -->
+    <a href="https://linkedin.com/in/sseguya-huzaifah-sulaiman-7424663b6" target="_blank" rel="noopener"
+       class="w-12 h-12 rounded-full surface_glass flex items-center justify-center text-on-surface hover:text-primary transition-colors aria-label='LinkedIn'">
+      <span class="material-symbols-outlined" data-icon="link">link</span>
+    </a>
+
+    <!-- WhatsApp -->
+    <a href="https://wa.me/0740819311" target="_blank" rel="noopener"
+       class="w-12 h-12 rounded-full surface_glass flex items-center justify-center text-on-surface hover:text-primary transition-colors aria-label='WhatsApp'">
+      <span class="material-symbols-outlined" data-icon="chat">chat</span>
+    </a>
+
+    <!-- GitHub / Code -->
+    <a href="https://github.com/sseguya" target="_blank" rel="noopener"
+       class="w-12 h-12 rounded-full surface_glass flex items-center justify-center text-on-surface hover:text-primary transition-colors aria-label='GitHub'">
+      <span class="material-symbols-outlined" data-icon="code">code</span>
+    </a>
+  </div>
+
+  <!-- Detailed Contact Card (For Email) -->
+  <div class="surface_glass rounded-2xl p-4 flex items-center gap-4 border border-white/10">
+    <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
+      <span class="material-symbols-outlined" data-icon="mail">mail</span>
+    </div>
+    <div class="overflow-hidden">
+      <p class="text-xs text-on-surface/60 font-medium uppercase tracking-wider">Email Me</p>
+      <a href="mailto:sseguyahuzaifahsulaiman155@gmail.com" class="text-on-surface hover:text-primary transition-colors block truncate font-medium">
+        sseguyahuzaifahsulaiman155@gmail.com
+      </a>
+    </div>
+  </div>
+</div>
+      </section>
+    </main>
+    <!-- Footer -->
+    <footer
+      class="bg-surface-container-lowest py-12 px-margin-mobile border-t border-outline-variant/20"
+    >
+      <div
+        class="max-w-container-max mx-auto flex flex-col gap-base text-center"
+      >
+
+        <p
+          class="font-body-md text-body-md text-outline-variant mt-4 text-[12px]"
+        >
+          © 2025 Hzyf. All rights reserved.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
